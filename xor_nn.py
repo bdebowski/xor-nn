@@ -20,10 +20,12 @@ with tf.name_scope('hidden') as scope:
     W1 = tf.Variable(tf.random_normal([2, 2]), name='W1')
     b1 = tf.Variable(tf.random_normal([2]), name='b1')
     h_out = tf.nn.sigmoid(tf.add(tf.matmul(x, W1), b1), name='hidden_layer')
+    # Things to record for tensorboard
     with tf.name_scope('summaries') as scope2:
         tf.summary.histogram('weights', W1)
         tf.summary.histogram('biases', b1)
         tf.summary.histogram('activations', h_out)
+        # With a graph this small we can record the value for each weight and bias
         tf.summary.scalar('w1', W1[0][0])
         tf.summary.scalar('w2', W1[0][1])
         tf.summary.scalar('w3', W1[1][0])
@@ -36,10 +38,12 @@ with tf.name_scope('output') as scope:
     W2 = tf.Variable(tf.random_normal([2, 1]), name='W2')
     b2 = tf.Variable(tf.random_normal([1]), name='b2')
     y_ = tf.nn.sigmoid(tf.add(tf.matmul(h_out, W2), b2), name='output_actual')
+    # Things to record for tensorboard
     with tf.name_scope('summaries') as scope2:
         tf.summary.histogram('weights', W2)
         tf.summary.histogram('biases', b2)
         tf.summary.histogram('activations', y_)
+        # With a graph this small we can record the value for each weight and bias
         tf.summary.scalar('w5', W2[0][0])
         tf.summary.scalar('w6', W2[1][0])
         tf.summary.scalar('b3', b2[0])
